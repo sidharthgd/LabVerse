@@ -84,31 +84,33 @@
 
         .paperclip-box {
             background-color: #555555;
-            padding: 6px;
-            border-radius: 5px;
-            border-top-left-radius: 0;
-            border-top-right-radius: 0;
-            border-bottom-right-radius: 7px;
-            border-bottom-left-radius: 7px;
+            padding: 12px;
+            border-radius: 50%;
             display: flex;
             align-items: center;
-            width: auto;
-            margin-left: 30px;
-            max-width: 290px;
+            justify-content: center;
+            width: 16px;
+            height: 16px;
+            margin-left: 15px;
+            margin-top: 7px;
+            cursor: pointer;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.4);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .paperclip-box:hover {
+            transform: translateY(-2px);
+            box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.6);
         }
 
         .paperclip-box img {
-            width: 16px;
-            height: 16px;
-            padding-right: 22px;
-            padding-left: 5px;
+            width: 15px;
+            height: 15px;
         }
 
-        .paperclip-text {
-            color: white;
-            font-size: 0.65rem;
-            font-family: 'Lato', sans-serif;
-            opacity: 0.65;
+        input[type="file"] {
+            display: none;
+            /* Hide the file input */
         }
     </style>
 </head>
@@ -122,16 +124,17 @@
                 <img src="checkmark.png" alt="Send" />
             </button>
         </div>
-        <div class="paperclip-box">
+        <label class="paperclip-box" for="file-upload">
             <img src="paperclip.png" alt="Paperclip" />
-            <span class="paperclip-text">Upload structured .csv or .xlsx files of your choice</span>
-        </div>
+        </label>
+        <input id="file-upload" type="file" accept=".csv, .xlsx" />
     </div>
 </body>
 
 <script>
     const input = document.querySelector('input[type="text"]');
     const sendButton = document.querySelector('.send-button');
+    const fileInput = document.getElementById('file-upload');
 
     sendButton.addEventListener('click', () => {
         const query = input.value;
@@ -139,12 +142,20 @@
             alert(query);
         }
     });
+
     input.addEventListener('keydown', (event) => {
         if (event.key === 'Enter') {
             const query = input.value;
             if (query) {
                 alert(query);
             }
+        }
+    });
+
+    fileInput.addEventListener('change', (event) => {
+        const file = event.target.files[0];
+        if (file) {
+            alert(`Selected file: ${file.name}`);
         }
     });
 </script>
