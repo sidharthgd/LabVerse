@@ -1,15 +1,21 @@
-// src/components/App.jsx
-import React, { useState } from 'react';
+// App.js or index.js
+import React from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import InputView from './InputView';
 import ChatbotView from './ChatbotView';
-import '../styles/styles.css';
 
 const App = () => {
-    const [showChat, setShowChat] = useState(false);
-
+    // return (
+    //     <Router>
+    //         <Routes>
+    //             <Route path="/" element={<InputView />} />
+    //             <Route path="/chat" element={<ChatbotView />} />
+    //         </Routes>
+    //     </Router>
+    // );
     return (
         <div>
-            {showChat ? <ChatbotView /> : <InputView />}
+            <InputView />
         </div>
     );
 };
