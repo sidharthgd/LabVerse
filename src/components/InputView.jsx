@@ -1,12 +1,16 @@
 // src/components/InputView.jsx
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+
 
 const InputView = () => {
     const [query, setQuery] = useState('');
+    let navigate = useNavigate();
+
 
     const handleSubmit = () => {
         if (query) {
-            alert(query); // Replace with your actual submit logic
+            navigate('/chat');
         }
     };
 

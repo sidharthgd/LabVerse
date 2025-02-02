@@ -9,8 +9,9 @@
     "electron-dev": "concurrently \"npm run dev\" \"wait-on http://localhost:8080 && electron .\""
   },
   "dependencies": {
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2"
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "react-router-dom": "^7.1.5"
   },
   "devDependencies": {
     "@babel/core": "^7.15.0",

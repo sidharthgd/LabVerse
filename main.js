@@ -15,7 +15,6 @@ function createWindow() {
         }
     });
 
-    // In development, load from webpack dev server
     if (process.env.NODE_ENV === 'development') {
         win.loadURL('http://localhost:8080');
     } else {

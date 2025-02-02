@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LabVerse</title>
+    <title>Lab-Verse</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
@@ -22,34 +22,5 @@
 <body>
     <div id="root"></div>
 </body>
-
-<script>
-    const input = document.querySelector('input[type="text"]');
-    const sendButton = document.querySelector('.send-button');
-    const fileInput = document.getElementById('file-upload');
-
-    sendButton.addEventListener('click', () => {
-        const query = input.value;
-        if (query) {
-            alert(query);
-        }
-    });
-
-    input.addEventListener('keydown', (event) => {
-        if (event.key === 'Enter') {
-            const query = input.value;
-            if (query) {
-                alert(query);
-            }
-        }
-    });
-
-    fileInput.addEventListener('change', (event) => {
-        const file = event.target.files[0];
-        if (file) {
-            alert(`Selected file: ${file.name}`);
-        }
-    });
-</script>
 
 </html>
