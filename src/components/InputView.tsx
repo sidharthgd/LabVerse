@@ -1,12 +1,11 @@
-// src/components/InputView.jsx
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import checkmarkImg from '../assets/checkmark.png';
+import paperclipImg from '../assets/paperclip.png';
 
-
-const InputView = () => {
-    const [query, setQuery] = useState('');
-    let navigate = useNavigate();
-
+const InputView: React.FC = () => {
+    const [query, setQuery] = useState<string>('');
+    const navigate = useNavigate();
 
     const handleSubmit = () => {
         if (query) {
@@ -14,8 +13,8 @@ const InputView = () => {
         }
     };
 
-    const handleFileChange = (event) => {
-        const file = event.target.files[0];
+    const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        const file = event.target.files?.[0];
         if (file) {
             alert(`Selected file: ${file.name}`);
         }
@@ -33,11 +32,11 @@ const InputView = () => {
                     onKeyDown={(e) => e.key === 'Enter' && handleSubmit()}
                 />
                 <button className="send-button" onClick={handleSubmit}>
-                    <img src={require('../assets/checkmark.png')} alt="Send" />
+                    <img src={checkmarkImg} alt="Send" />
                 </button>
             </div>
             <label className="paperclip-box" htmlFor="file-upload">
-                <img src={require('../assets/paperclip.png')} alt="Paperclip" />
+                <img src={paperclipImg} alt="Paperclip" />
             </label>
             <input
                 id="file-upload"

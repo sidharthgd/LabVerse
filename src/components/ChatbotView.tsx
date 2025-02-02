@@ -1,6 +1,6 @@
 import React from 'react';
 
-const ChatbotView = () => {
+const ChatbotView: React.FC = () => {
     return (
         <div className="chat-container">
             <h1>Chatbot</h1>

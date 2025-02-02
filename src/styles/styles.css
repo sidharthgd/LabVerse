@@ -12,7 +12,7 @@ body {
 
 .container {
     text-align: center;
-    width: 700px;
+    width: 800px;
 }
 
 h1 {
@@ -38,7 +38,7 @@ input[type="text"] {
     color: #ffffff;
     flex: 1;
     padding: 15px;
-    font-size: 0.9rem;
+    font-size: 1.1rem;
     border: none;
     outline: none;
     
