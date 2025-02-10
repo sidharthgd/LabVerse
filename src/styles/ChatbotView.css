@@ -1,10 +1,33 @@
+@import url('https: //fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,200..800;1,6..72,200..800&display=swap');
+
 /* Full Chat Container */
 .chat-container {
-    width: 50vw;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: row;
+    background-color: #1e1c1c;
+    scrollbar-color: #565656 #1e1c1c;
+}
+
+.prevChat-container {
+    width: 15vw;
     height: 100vh;
     display: flex;
     flex-direction: column;
     background-color: #1e1c1c;
+    scrollbar-color: #565656 #1e1c1c;
+    border-right: 3px solid white;
+    margin-right: 10%;
+}
+
+.messages-container {
+    width: 60vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background-color: #1e1c1c;
+    scrollbar-color: #565656 #1e1c1c;
 }
 
 /* Scrollable Chat Box */
@@ -24,12 +47,12 @@
     margin: 5px 0;
     border-radius: 18px;
     word-wrap: break-word;
-    font-size: 16px;
+    font-size: 13px;
 }
 
 /* User Messages */
 .User {
-    background-color: #0078ff;
+    background-color: #565656;
     color: white;
     align-self: flex-end;
     border-bottom-right-radius: 4px;
@@ -37,10 +60,10 @@
 
 /* AI Messages */
 .AI {
-    background-color: #444;
     color: white;
     align-self: flex-start;
-    border-bottom-left-radius: 4px;
+    font-size: 20px;    
+    font-family: 'Newsreader', serif;
 }
 
 /* Chat Input */

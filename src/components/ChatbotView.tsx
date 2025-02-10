@@ -27,23 +27,36 @@ const ChatbotView: React.FC = () => {
         }
     };
 
+    const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+        if (e.key === 'Enter') {
+            handleSend();
+        }
+    };
+
     return (
-        <div className="chat-container">
-            <div className="chat-box">
-                {messages.map((msg, index) => (
-                    <div key={index} className={`message ${msg.sender}`}>
-                        {msg.text}
-                    </div>
-                ))}
+        <div className="chat-container"> 
+            <div className = "prevChat-container">
+                <h3 style={{ color: 'white' }}> Previous chats will go here</h3>
+                
             </div>
-            <div className="chat-input">
-                <input
-                    type="text"
-                    value={query}
-                    onChange={(e) => setQuery(e.target.value)}
-                    placeholder="Type your message..."
-                />
-                <button onClick={handleSend}></button>
+            <div className="messages-container">
+                <div className="chat-box">
+                    {messages.map((msg, index) => (
+                        <div key={index} className={`message ${msg.sender}`}>
+                            {msg.text}
+                        </div>
+                    ))}
+                </div>
+                <div className="chat-input">
+                    <input
+                        type="text"
+                        value={query}
+                        onChange={(e) => setQuery(e.target.value)}
+                        onKeyDown={(e) => e.key === 'Enter' && handleKeyDown(e)}
+                        placeholder="Type your message..."
+                    />
+                    <button onClick={handleSend}></button>
+                </div>
             </div>
         </div>
     );
