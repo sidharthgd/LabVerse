@@ -10,22 +10,54 @@ const ChatbotView: React.FC = () => {
     };
 
     const location = useLocation();
-    const initialMessages = location.state?.responseData?.messages || [];
+    const responseData = location.state?.responseData || null;
+    const query = location.state?.query || "";
+
+    // initialize messages with the query and API response
+    const initialMessages: Message[] = [];
+
+    if (query) {
+        initialMessages.push({ text: query, sender: "User" });
+    }
+
+    if (responseData?.message) {
+        initialMessages.push({ text: responseData.message, sender: "AI" });
+    }
+
     const [messages, setMessages] = useState<Message[]>(initialMessages);
-    const [query, setQuery] = useState("");
+    const [userQuery, setUserQuery] = useState(""); // this is for new input in the chat
 
-    const handleSend = () => {
-        if (query.trim()) {
-            const newMessages: Message[] = [...messages, { text: query, sender: "User" }];
+    const handleSend = async () => {
+        if (userQuery.trim()) {
+            // add the user's message immediately
+            const newMessages: Message[] = [...messages, { text: userQuery, sender: "User" }];
             setMessages(newMessages);
-            setQuery(""); // Clear input
+            setUserQuery(""); // clear input field
 
-            // Simulating AI response (Replace with API call)
-            setTimeout(() => {
-                setMessages([...newMessages, { text: "AI Response to: " + query, sender: "AI" } as Message]);
-            }, 1000);
+            try {
+                const response = await fetch("http://127.0.0.1:8000/chat", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify({ query: userQuery }),
+                });
+
+                if (!response.ok) {
+                    throw new Error("Failed to fetch AI response");
+                }
+
+                const data = await response.json();
+
+                // update messages with AI response
+                setMessages([...newMessages, { text: data.message, sender: "AI" }]);
+            } catch (error) {
+                console.error("Error sending message:", error);
+                setMessages([...newMessages, { text: "Error fetching AI response.", sender: "AI" }]);
+            }
         }
     };
+
 
     const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
         if (e.key === 'Enter') {
@@ -34,10 +66,9 @@ const ChatbotView: React.FC = () => {
     };
 
     return (
-        <div className="chat-container"> 
-            <div className = "prevChat-container">
+        <div className="chat-container">
+            <div className="prevChat-container">
                 <h3 style={{ color: 'white' }}> Previous chats will go here</h3>
-                
             </div>
             <div className="messages-container">
                 <div className="chat-box">
@@ -50,8 +81,8 @@ const ChatbotView: React.FC = () => {
                 <div className="chat-input">
                     <input
                         type="text"
-                        value={query}
-                        onChange={(e) => setQuery(e.target.value)}
+                        value={userQuery}
+                        onChange={(e) => setUserQuery(e.target.value)}
                         onKeyDown={(e) => e.key === 'Enter' && handleKeyDown(e)}
                         placeholder="Type your message..."
                     />

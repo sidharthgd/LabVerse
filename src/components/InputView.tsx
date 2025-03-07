@@ -13,25 +13,46 @@ const InputView: React.FC = () => {
     const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
 
-        if (query === '') return; // Prevent submitting if no query is entered
-
-        const formData = new FormData();
-        formData.append('query', query);
-        if (file) formData.append('file', file);
-        console.log("Form data being sent:", formData);
+        if (query.trim() === '') return; // Prevent submitting if no query is entered
 
         try {
-            const response = await fetch('http://127.0.0.1:8000/upload', {
-                method: 'POST',
-                body: formData,
-            });
+            let response: Response;
+            if (!file) {
+                console.log("submitting query to API without file")
+                response = await fetch('http://127.0.0.1:8000/chat', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ query: query }),
+                });
+            } else {
+                const formData = new FormData();
+                formData.append('query', query);
+                formData.append('file', file);
+
+                response = await fetch('http://127.0.0.1:8000/upload', {
+                    method: 'POST',
+                    body: formData,
+                });
+            }
+
+            const contentType = response.headers.get("Content-Type");
+
+            if (contentType && contentType.includes("text/csv")) {
+                // If response is CSV, parse as text
+                const csvText = await response.text();
+                console.log("CSV Response:", csvText);
+
+                // Do something with the CSV data (e.g., display or download)
+            } 
 
             const data = await response.json();
+            console.log("API Response:", data); // log the API response
             setResponseData(data);
 
             // Redirect to chatbot view
-            navigate('/chat', { state: { responseData: data } });
-            console.log(responseData);
+            navigate('/chat', { state: { query: query, responseData: data } });
 
         } catch (error) {
             console.error('Error uploading file:', error);

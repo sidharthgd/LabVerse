@@ -1,11 +1,15 @@
 from fastapi import FastAPI, File, Form, UploadFile
-from fastapi.responses import JSONResponse
+from fastapi.responses import JSONResponse, StreamingResponse
 from fastapi.middleware.cors import CORSMiddleware
-from typing import Optional
+from pydantic import BaseModel
 import io
+from io import BytesIO
 import pandas as pd  # Assuming you'll use pandas for your functionality
 
 app = FastAPI()
+
+class QueryRequest(BaseModel):
+    query: str
 
 #allow all origins
 app.add_middleware(
@@ -18,28 +22,47 @@ app.add_middleware(
 
 
 @app.post("/upload")
-async def upload_file(query: str = Form(...), file: Optional[UploadFile] = File(None)):  
-    print ("Received request")
+async def upload_file(query: str = Form(...), file: UploadFile = File(...)):
+    # Read the uploaded file into a pandas DataFrame
     try:
-
-        #no file provided
-        if (file is None):
-            return JSONResponse(content={"message": f"Query received! No File.", "query": query}, status_code=200)
-        
+        # Determine file type and read accordingly
+        if file.filename.endswith('.csv'):
+            # Read CSV file into DataFrame
+            contents = await file.read()
+            df = pd.read_csv(io.BytesIO(contents))
+        elif file.filename.endswith('.xlsx'):
+            # Read Excel file into DataFrame
+            contents = await file.read()
+            df = pd.read_excel(io.BytesIO(contents))
         else:
-            #print(f"Received query: {query}")
-            print(f"Received file: {file.filename}")
+            return {"error": "Invalid file type. Only CSV and Excel files are supported."}
 
-            file_content = await file.read()
-            file_like_object = io.BytesIO(file_content)
+        # Get the first few rows of the dataframe (head)
+        head_df = df.head()  # You can specify the number of rows, default is 5
 
-            df = pd.read_csv(file_like_object)
+        # Convert the head DataFrame to CSV or Excel
+        if file.filename.endswith('.csv'):
+            output = BytesIO()
+            head_df.to_csv(output, index=False)
+            output.seek(0)
+            return StreamingResponse(output, media_type="text/csv", headers={"Content-Disposition": "attachment; filename=head.csv"})
+        
+        elif file.filename.endswith('.xlsx'):
+            output = BytesIO()
+            head_df.to_excel(output, index=False, engine='openpyxl')
+            output.seek(0)
+            return StreamingResponse(output, media_type="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", headers={"Content-Disposition": "attachment; filename=head.xlsx"})
 
-            # Now you can perform any data processing on df
-            result = df.head()  # Example: get the first few rows of the dataframe
+    except Exception as e:
+        return {"error": str(e)}
 
-            response_data = {"message": f"File {file.filename} processed successfully!", "query": query, "data": result.to_dict()}
-            return JSONResponse(content=response_data, status_code=200)
+@app.post("/chat")
+async def chat_endpoint(request: QueryRequest):  
+    print ("Received chat request")
+    try:
+        query = request.query
+        print(f"Received query: {query}")
+        return JSONResponse(content={"message": f"Query received!: {query}", "query": query}, status_code=200)
 
     except Exception as e:
         print(f"Error processing file: {e}")
