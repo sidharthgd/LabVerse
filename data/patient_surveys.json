@@ -1,0 +1,716 @@
+[
+    {
+        "participant_id": "P001",
+        "survey_date": "2025-01-15",
+        "survey_type": "baseline",
+        "responses": {
+            "overall_health": 4,
+            "energy_level": 3,
+            "sleep_quality": 4,
+            "stress_level": 2,
+            "medication_adherence": 5,
+            "side_effects": "None",
+            "physical_activity_days_per_week": 3,
+            "diet_quality": 4,
+            "mood": "Good",
+            "additional_comments": "Looking forward to participating in the study."
+        }
+    },
+    {
+        "participant_id": "P002",
+        "survey_date": "2025-01-16",
+        "survey_type": "baseline",
+        "responses": {
+            "overall_health": 3,
+            "energy_level": 3,
+            "sleep_quality": 2,
+            "stress_level": 4,
+            "medication_adherence": 4,
+            "side_effects": "Occasional headache",
+            "physical_activity_days_per_week": 2,
+            "diet_quality": 3,
+            "mood": "Fair",
+            "additional_comments": "Have been having trouble sleeping lately."
+        }
+    },
+    {
+        "participant_id": "P003",
+        "survey_date": "2025-01-16",
+        "survey_type": "baseline",
+        "responses": {
+            "overall_health": 2,
+            "energy_level": 2,
+            "sleep_quality": 3,
+            "stress_level": 3,
+            "medication_adherence": 5,
+            "side_effects": "Fatigue",
+            "physical_activity_days_per_week": 1,
+            "diet_quality": 3,
+            "mood": "Fair",
+            "additional_comments": "Hoping this study will help improve my condition."
+        }
+    },
+    {
+        "participant_id": "P004",
+        "survey_date": "2025-01-17",
+        "survey_type": "baseline",
+        "responses": {
+            "overall_health": 5,
+            "energy_level": 4,
+            "sleep_quality": 4,
+            "stress_level": 2,
+            "medication_adherence": 5,
+            "side_effects": "None",
+            "physical_activity_days_per_week": 5,
+            "diet_quality": 5,
+            "mood": "Excellent",
+            "additional_comments": "I maintain a regular exercise routine and healthy diet."
+        }
+    },
+    {
+        "participant_id": "P005",
+        "survey_date": "2025-01-17",
+        "survey_type": "baseline",
+        "responses": {
+            "overall_health": 1,
+            "energy_level": 1,
+            "sleep_quality": 2,
+            "stress_level": 5,
+            "medication_adherence": 3,
+            "side_effects": "Nausea, dizziness",
+            "physical_activity_days_per_week": 0,
+            "diet_quality": 2,
+            "mood": "Poor",
+            "additional_comments": "Finding it difficult to manage my symptoms."
+        }
+    },
+    {
+        "participant_id": "P006",
+        "survey_date": "2025-01-18",
+        "survey_type": "baseline",
+        "responses": {
+            "overall_health": 3,
+            "energy_level": 3,
+            "sleep_quality": 3,
+            "stress_level": 3,
+            "medication_adherence": 4,
+            "side_effects": "Mild dry mouth",
+            "physical_activity_days_per_week": 2,
+            "diet_quality": 3,
+            "mood": "Fair",
+            "additional_comments": "No major concerns at this time."
+        }
+    },
+    {
+        "participant_id": "P007",
+        "survey_date": "2025-01-18",
+        "survey_type": "baseline",
+        "responses": {
+            "overall_health": 4,
+            "energy_level": 3,
+            "sleep_quality": 3,
+            "stress_level": 3,
+            "medication_adherence": 5,
+            "side_effects": "None",
+            "physical_activity_days_per_week": 3,
+            "diet_quality": 4,
+            "mood": "Good",
+            "additional_comments": "Feeling optimistic about the treatment."
+        }
+    },
+    {
+        "participant_id": "P008",
+        "survey_date": "2025-01-19",
+        "survey_type": "baseline",
+        "responses": {
+            "overall_health": 2,
+            "energy_level": 2,
+            "sleep_quality": 2,
+            "stress_level": 4,
+            "medication_adherence": 3,
+            "side_effects": "Joint pain",
+            "physical_activity_days_per_week": 1,
+            "diet_quality": 3,
+            "mood": "Fair",
+            "additional_comments": "Arthritis has been acting up lately."
+        }
+    },
+    {
+        "participant_id": "P009",
+        "survey_date": "2025-01-19",
+        "survey_type": "baseline",
+        "responses": {
+            "overall_health": 4,
+            "energy_level": 4,
+            "sleep_quality": 4,
+            "stress_level": 2,
+            "medication_adherence": 5,
+            "side_effects": "None",
+            "physical_activity_days_per_week": 4,
+            "diet_quality": 4,
+            "mood": "Good",
+            "additional_comments": "Recently started a new fitness program."
+        }
+    },
+    {
+        "participant_id": "P010",
+        "survey_date": "2025-01-20",
+        "survey_type": "baseline",
+        "responses": {
+            "overall_health": 1,
+            "energy_level": 1,
+            "sleep_quality": 1,
+            "stress_level": 5,
+            "medication_adherence": 2,
+            "side_effects": "Severe fatigue, headaches",
+            "physical_activity_days_per_week": 0,
+            "diet_quality": 2,
+            "mood": "Poor",
+            "additional_comments": "Struggling with daily activities due to symptoms."
+        }
+    },
+    {
+        "participant_id": "P011",
+        "survey_date": "2025-01-20",
+        "survey_type": "baseline",
+        "responses": {
+            "overall_health": 3,
+            "energy_level": 3,
+            "sleep_quality": 3,
+            "stress_level": 3,
+            "medication_adherence": 4,
+            "side_effects": "Occasional stomach upset",
+            "physical_activity_days_per_week": 2,
+            "diet_quality": 3,
+            "mood": "Fair",
+            "additional_comments": "Hoping to improve my exercise routine."
+        }
+    },
+    {
+        "participant_id": "P012",
+        "survey_date": "2025-01-21",
+        "survey_type": "baseline",
+        "responses": {
+            "overall_health": 4,
+            "energy_level": 4,
+            "sleep_quality": 4,
+            "stress_level": 2,
+            "medication_adherence": 5,
+            "side_effects": "None",
+            "physical_activity_days_per_week": 4,
+            "diet_quality": 4,
+            "mood": "Good",
+            "additional_comments": "Recently retired and enjoying more free time."
+        }
+    },
+    {
+        "participant_id": "P013",
+        "survey_date": "2025-01-21",
+        "survey_type": "baseline",
+        "responses": {
+            "overall_health": 1,
+            "energy_level": 1,
+            "sleep_quality": 2,
+            "stress_level": 5,
+            "medication_adherence": 3,
+            "side_effects": "Dizziness, blurred vision",
+            "physical_activity_days_per_week": 0,
+            "diet_quality": 2,
+            "mood": "Poor",
+            "additional_comments": "Concerned about worsening symptoms."
+        }
+    },
+    {
+        "participant_id": "P014",
+        "survey_date": "2025-01-22",
+        "survey_type": "baseline",
+        "responses": {
+            "overall_health": 3,
+            "energy_level": 3,
+            "sleep_quality": 3,
+            "stress_level": 3,
+            "medication_adherence": 4,
+            "side_effects": "Mild headaches",
+            "physical_activity_days_per_week": 2,
+            "diet_quality": 3,
+            "mood": "Fair",
+            "additional_comments": "Working on improving my diet."
+        }
+    },
+    {
+        "participant_id": "P015",
+        "survey_date": "2025-01-22",
+        "survey_type": "baseline",
+        "responses": {
+            "overall_health": 5,
+            "energy_level": 5,
+            "sleep_quality": 5,
+            "stress_level": 1,
+            "medication_adherence": 5,
+            "side_effects": "None",
+            "physical_activity_days_per_week": 6,
+            "diet_quality": 5,
+            "mood": "Excellent",
+            "additional_comments": "Training for a marathon currently."
+        }
+    },
+    {
+        "participant_id": "P016",
+        "survey_date": "2025-01-23",
+        "survey_type": "baseline",
+        "responses": {
+            "overall_health": 2,
+            "energy_level": 2,
+            "sleep_quality": 2,
+            "stress_level": 4,
+            "medication_adherence": 3,
+            "side_effects": "Muscle pain",
+            "physical_activity_days_per_week": 1,
+            "diet_quality": 2,
+            "mood": "Fair",
+            "additional_comments": "Having difficulty with side effects of current medication."
+        }
+    },
+    {
+        "participant_id": "P017",
+        "survey_date": "2025-01-23",
+        "survey_type": "baseline",
+        "responses": {
+            "overall_health": 3,
+            "energy_level": 3,
+            "sleep_quality": 3,
+            "stress_level": 3,
+            "medication_adherence": 4,
+            "side_effects": "Occasional drowsiness",
+            "physical_activity_days_per_week": 2,
+            "diet_quality": 3,
+            "mood": "Fair",
+            "additional_comments": "No significant changes recently."
+        }
+    },
+    {
+        "participant_id": "P018",
+        "survey_date": "2025-01-24",
+        "survey_type": "baseline",
+        "responses": {
+            "overall_health": 1,
+            "energy_level": 1,
+            "sleep_quality": 1,
+            "stress_level": 5,
+            "medication_adherence": 2,
+            "side_effects": "Severe joint pain, fatigue",
+            "physical_activity_days_per_week": 0,
+            "diet_quality": 2,
+            "mood": "Poor",
+            "additional_comments": "Pain significantly limiting daily activities."
+        }
+    },
+    {
+        "participant_id": "P019",
+        "survey_date": "2025-01-24",
+        "survey_type": "baseline",
+        "responses": {
+            "overall_health": 4,
+            "energy_level": 4,
+            "sleep_quality": 4,
+            "stress_level": 2,
+            "medication_adherence": 5,
+            "side_effects": "None",
+            "physical_activity_days_per_week": 4,
+            "diet_quality": 4,
+            "mood": "Good",
+            "additional_comments": "Recently started yoga classes."
+        }
+    },
+    {
+        "participant_id": "P020",
+        "survey_date": "2025-01-25",
+        "survey_type": "baseline",
+        "responses": {
+            "overall_health": 3,
+            "energy_level": 3,
+            "sleep_quality": 3,
+            "stress_level": 3,
+            "medication_adherence": 4,
+            "side_effects": "Mild stomach upset",
+            "physical_activity_days_per_week": 2,
+            "diet_quality": 3,
+            "mood": "Fair",
+            "additional_comments": "Trying to reduce caffeine intake."
+        }
+    },
+    {
+        "participant_id": "P021",
+        "survey_date": "2025-01-25",
+        "survey_type": "baseline",
+        "responses": {
+            "overall_health": 1,
+            "energy_level": 1,
+            "sleep_quality": 2,
+            "stress_level": 5,
+            "medication_adherence": 3,
+            "side_effects": "Nausea, headaches",
+            "physical_activity_days_per_week": 0,
+            "diet_quality": 2,
+            "mood": "Poor",
+            "additional_comments": "Recently diagnosed and adjusting to new medications."
+        }
+    },
+    {
+        "participant_id": "P022",
+        "survey_date": "2025-01-26",
+        "survey_type": "baseline",
+        "responses": {
+            "overall_health": 3,
+            "energy_level": 3,
+            "sleep_quality": 3,
+            "stress_level": 3,
+            "medication_adherence": 4,
+            "side_effects": "Occasional dizziness",
+            "physical_activity_days_per_week": 2,
+            "diet_quality": 3,
+            "mood": "Fair",
+            "additional_comments": "Trying to improve sleep habits."
+        }
+    },
+    {
+        "participant_id": "P023",
+        "survey_date": "2025-01-26",
+        "survey_type": "baseline",
+        "responses": {
+            "overall_health": 4,
+            "energy_level": 4,
+            "sleep_quality": 4,
+            "stress_level": 2,
+            "medication_adherence": 5,
+            "side_effects": "None",
+            "physical_activity_days_per_week": 4,
+            "diet_quality": 4,
+            "mood": "Good",
+            "additional_comments": "Recently started a Mediterranean diet."
+        }
+    },
+    {
+        "participant_id": "P024",
+        "survey_date": "2025-01-27",
+        "survey_type": "baseline",
+        "responses": {
+            "overall_health": 2,
+            "energy_level": 2,
+            "sleep_quality": 2,
+            "stress_level": 4,
+            "medication_adherence": 3,
+            "side_effects": "Joint stiffness",
+            "physical_activity_days_per_week": 1,
+            "diet_quality": 3,
+            "mood": "Fair",
+            "additional_comments": "Morning stiffness is particularly challenging."
+        }
+    },
+    {
+        "participant_id": "P025",
+        "survey_date": "2025-01-27",
+        "survey_type": "baseline",
+        "responses": {
+            "overall_health": 3,
+            "energy_level": 3,
+            "sleep_quality": 3,
+            "stress_level": 3,
+            "medication_adherence": 4,
+            "side_effects": "Mild dry mouth",
+            "physical_activity_days_per_week": 2,
+            "diet_quality": 3,
+            "mood": "Fair",
+            "additional_comments": "No significant changes to report."
+        }
+    },
+    {
+        "participant_id": "P026",
+        "survey_date": "2025-01-28",
+        "survey_type": "baseline",
+        "responses": {
+            "overall_health": 1,
+            "energy_level": 1,
+            "sleep_quality": 1,
+            "stress_level": 5,
+            "medication_adherence": 2,
+            "side_effects": "Severe fatigue, weakness",
+            "physical_activity_days_per_week": 0,
+            "diet_quality": 2,
+            "mood": "Poor",
+            "additional_comments": "Having trouble with basic tasks due to fatigue."
+        }
+    },
+    {
+        "participant_id": "P027",
+        "survey_date": "2025-01-28",
+        "survey_type": "baseline",
+        "responses": {
+            "overall_health": 4,
+            "energy_level": 4,
+            "sleep_quality": 4,
+            "stress_level": 2,
+            "medication_adherence": 5,
+            "side_effects": "None",
+            "physical_activity_days_per_week": 4,
+            "diet_quality": 4,
+            "mood": "Good",
+            "additional_comments": "Started swimming three times a week."
+        }
+    },
+    {
+        "participant_id": "P028",
+        "survey_date": "2025-01-29",
+        "survey_type": "baseline",
+        "responses": {
+            "overall_health": 3,
+            "energy_level": 3,
+            "sleep_quality": 3,
+            "stress_level": 3,
+            "medication_adherence": 4,
+            "side_effects": "Occasional headaches",
+            "physical_activity_days_per_week": 2,
+            "diet_quality": 3,
+            "mood": "Fair",
+            "additional_comments": "Working on reducing stress levels."
+        }
+    },
+    {
+        "participant_id": "P029",
+        "survey_date": "2025-01-29",
+        "survey_type": "baseline",
+        "responses": {
+            "overall_health": 1,
+            "energy_level": 1,
+            "sleep_quality": 2,
+            "stress_level": 5,
+            "medication_adherence": 3,
+            "side_effects": "Vision changes, dizziness",
+            "physical_activity_days_per_week": 0,
+            "diet_quality": 2,
+            "mood": "Poor",
+            "additional_comments": "Concerned about medication side effects."
+        }
+    },
+    {
+        "participant_id": "P030",
+        "survey_date": "2025-01-30",
+        "survey_type": "baseline",
+        "responses": {
+            "overall_health": 3,
+            "energy_level": 3,
+            "sleep_quality": 3,
+            "stress_level": 3,
+            "medication_adherence": 4,
+            "side_effects": "Mild stomach discomfort",
+            "physical_activity_days_per_week": 2,
+            "diet_quality": 3,
+            "mood": "Fair",
+            "additional_comments": "Trying to improve water intake."
+        }
+    },
+    {
+        "participant_id": "P031",
+        "survey_date": "2025-01-30",
+        "survey_type": "baseline",
+        "responses": {
+            "overall_health": 5,
+            "energy_level": 5,
+            "sleep_quality": 5,
+            "stress_level": 1,
+            "medication_adherence": 5,
+            "side_effects": "None",
+            "physical_activity_days_per_week": 6,
+            "diet_quality": 5,
+            "mood": "Excellent",
+            "additional_comments": "Recently retired and focusing on health."
+        }
+    },
+    {
+        "participant_id": "P032",
+        "survey_date": "2025-01-31",
+        "survey_type": "baseline",
+        "responses": {
+            "overall_health": 2,
+            "energy_level": 2,
+            "sleep_quality": 2,
+            "stress_level": 4,
+            "medication_adherence": 3,
+            "side_effects": "Joint pain",
+            "physical_activity_days_per_week": 1,
+            "diet_quality": 2,
+            "mood": "Fair",
+            "additional_comments": "Pain limits my ability to exercise."
+        }
+    },
+    {
+        "participant_id": "P033",
+        "survey_date": "2025-01-31",
+        "survey_type": "baseline",
+        "responses": {
+            "overall_health": 3,
+            "energy_level": 3,
+            "sleep_quality": 3,
+            "stress_level": 3,
+            "medication_adherence": 4,
+            "side_effects": "Occasional dry mouth",
+            "physical_activity_days_per_week": 2,
+            "diet_quality": 3,
+            "mood": "Fair",
+            "additional_comments": "Trying to establish a better routine."
+        }
+    },
+    {
+        "participant_id": "P034",
+        "survey_date": "2025-02-01",
+        "survey_type": "baseline",
+        "responses": {
+            "overall_health": 1,
+            "energy_level": 1,
+            "sleep_quality": 1,
+            "stress_level": 5,
+            "medication_adherence": 2,
+            "side_effects": "Severe nausea, fatigue",
+            "physical_activity_days_per_week": 0,
+            "diet_quality": 1,
+            "mood": "Poor",
+            "additional_comments": "Difficulty eating due to nausea."
+        }
+    },
+    {
+        "participant_id": "P035",
+        "survey_date": "2025-02-01",
+        "survey_type": "baseline",
+        "responses": {
+            "overall_health": 4,
+            "energy_level": 4,
+            "sleep_quality": 4,
+            "stress_level": 2,
+            "medication_adherence": 5,
+            "side_effects": "None",
+            "physical_activity_days_per_week": 4,
+            "diet_quality": 4,
+            "mood": "Good",
+            "additional_comments": "Recently joined a walking group."
+        }
+    },
+    {
+        "participant_id": "P036",
+        "survey_date": "2025-02-02",
+        "survey_type": "baseline",
+        "responses": {
+            "overall_health": 3,
+            "energy_level": 3,
+            "sleep_quality": 3,
+            "stress_level": 3,
+            "medication_adherence": 4,
+            "side_effects": "Mild headaches",
+            "physical_activity_days_per_week": 2,
+            "diet_quality": 3,
+            "mood": "Fair",
+            "additional_comments": "No significant changes lately."
+        }
+    },
+    {
+        "participant_id": "P037",
+        "survey_date": "2025-02-02",
+        "survey_type": "baseline",
+        "responses": {
+            "overall_health": 4,
+            "energy_level": 4,
+            "sleep_quality": 4,
+            "stress_level": 2,
+            "medication_adherence": 5,
+            "side_effects": "None",
+            "physical_activity_days_per_week": 4,
+            "diet_quality": 4,
+            "mood": "Good",
+            "additional_comments": "Started meditation practice recently."
+        }
+    },
+    {
+        "participant_id": "P038",
+        "survey_date": "2025-02-03",
+        "survey_type": "baseline",
+        "responses": {
+            "overall_health": 3,
+            "energy_level": 3,
+            "sleep_quality": 3,
+            "stress_level": 3,
+            "medication_adherence": 4,
+            "side_effects": "Occasional dizziness",
+            "physical_activity_days_per_week": 2,
+            "diet_quality": 3,
+            "mood": "Fair",
+            "additional_comments": "Trying to improve sleep habits."
+        }
+    },
+    {
+        "participant_id": "P039",
+        "survey_date": "2025-02-03",
+        "survey_type": "baseline",
+        "responses": {
+            "overall_health": 5,
+            "energy_level": 5,
+            "sleep_quality": 5,
+            "stress_level": 1,
+            "medication_adherence": 5,
+            "side_effects": "None",
+            "physical_activity_days_per_week": 6,
+            "diet_quality": 5,
+            "mood": "Excellent",
+            "additional_comments": "Training for a triathlon."
+        }
+    },
+    {
+        "participant_id": "P040",
+        "survey_date": "2025-02-04",
+        "survey_type": "baseline",
+        "responses": {
+            "overall_health": 2,
+            "energy_level": 2,
+            "sleep_quality": 2,
+            "stress_level": 4,
+            "medication_adherence": 3,
+            "side_effects": "Joint stiffness",
+            "physical_activity_days_per_week": 1,
+            "diet_quality": 2,
+            "mood": "Fair",
+            "additional_comments": "Having difficulty with morning stiffness."
+        }
+    },
+    {
+        "participant_id": "P041",
+        "survey_date": "2025-02-04",
+        "survey_type": "baseline",
+        "responses": {
+            "overall_health": 3,
+            "energy_level": 3,
+            "sleep_quality": 3,
+            "stress_level": 3,
+            "medication_adherence": 4,
+            "side_effects": "Mild skin irritation",
+            "physical_activity_days_per_week": 2,
+            "diet_quality": 3,
+            "mood": "Fair",
+            "additional_comments": "Working on a healthier meal plan."
+        }
+    },
+    {
+        "participant_id": "P042",
+        "survey_date": "2025-02-05",
+        "survey_type": "baseline",
+        "responses": {
+            "overall_health": 1,
+            "energy_level": 1,
+            "sleep_quality": 1,
+            "stress_level": 5,
+            "medication_adherence": 2,
+            "side_effects": "Severe fatigue, weakness",
+            "physical_activity_days_per_week": 0,
+            "diet_quality": 1,
+            "mood": "Poor",
+            "additional_comments": "Condition has worsened in recent weeks."
+        }
+    }
+]

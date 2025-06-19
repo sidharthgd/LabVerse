@@ -68,7 +68,6 @@ const ChatbotView: React.FC = () => {
     return (
         <div className="chat-container">
             <div className="prevChat-container">
-                <h3 style={{ color: 'white' }}> Previous chats will go here</h3>
             </div>
             <div className="messages-container">
                 <div className="chat-box">

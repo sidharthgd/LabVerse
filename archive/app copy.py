@@ -62,7 +62,7 @@ async def chat_endpoint(request: QueryRequest):
     try:
         query = request.query
         print(f"Received query: {query}")
-        return JSONResponse(content={"message": f"Query received!: {query}", "query": query}, status_code=200)
+        return JSONResponse(content={"message": f"Query received by API!: {query}", "query": query}, status_code=200)
 
     except Exception as e:
         print(f"Error processing file: {e}")

@@ -1,0 +1,43 @@
+participant_id,age,sex,race,ethnicity,education,marital_status,employment,income_bracket,zip_code
+P001,42,M,White,Non-Hispanic,Bachelor's,Married,Full-time,$75k-$100k,90210
+P002,35,F,Black,Non-Hispanic,Master's,Single,Full-time,$50k-$75k,10001
+P003,67,M,White,Hispanic,High School,Widowed,Retired,$25k-$50k,60601
+P004,29,F,Asian,Non-Hispanic,PhD,Single,Full-time,$100k-$150k,94103
+P005,51,F,White,Non-Hispanic,Associate's,Divorced,Part-time,$25k-$50k,33101
+P006,44,M,Black,Non-Hispanic,Bachelor's,Married,Full-time,$50k-$75k,20001
+P007,38,F,Hispanic,Hispanic,Master's,Married,Full-time,$75k-$100k,77002
+P008,72,M,White,Non-Hispanic,Bachelor's,Married,Retired,$50k-$75k,02108
+P009,31,F,Asian,Non-Hispanic,Master's,Single,Full-time,$75k-$100k,98101
+P010,56,M,Black,Non-Hispanic,High School,Divorced,Full-time,$25k-$50k,30301
+P011,41,F,White,Non-Hispanic,Bachelor's,Married,Part-time,$50k-$75k,80202
+P012,62,M,Asian,Non-Hispanic,PhD,Married,Full-time,$150k+,90001
+P013,33,F,Hispanic,Hispanic,Associate's,Single,Full-time,$25k-$50k,85001
+P014,47,M,White,Non-Hispanic,Master's,Married,Full-time,$100k-$150k,19103
+P015,28,F,Black,Non-Hispanic,Bachelor's,Single,Full-time,$50k-$75k,60605
+P016,59,M,White,Hispanic,High School,Married,Full-time,$25k-$50k,92101
+P017,36,F,White,Non-Hispanic,Master's,Divorced,Full-time,$75k-$100k,97201
+P018,69,M,Black,Non-Hispanic,Associate's,Widowed,Retired,$25k-$50k,33139
+P019,32,F,Asian,Non-Hispanic,Bachelor's,Single,Full-time,$50k-$75k,80205
+P020,49,M,White,Non-Hispanic,Master's,Married,Full-time,$100k-$150k,10011
+P021,37,F,Hispanic,Hispanic,High School,Single,Part-time,<$25k,77006
+P022,65,M,White,Non-Hispanic,Bachelor's,Married,Retired,$50k-$75k,02110
+P023,30,F,Black,Non-Hispanic,Master's,Single,Full-time,$75k-$100k,20008
+P024,52,M,Asian,Non-Hispanic,PhD,Married,Full-time,$150k+,94108
+P025,39,F,White,Non-Hispanic,Bachelor's,Divorced,Full-time,$50k-$75k,30305
+P026,71,M,Black,Non-Hispanic,High School,Widowed,Retired,<$25k,60610
+P027,34,F,White,Hispanic,Associate's,Single,Full-time,$25k-$50k,85004
+P028,46,M,Asian,Non-Hispanic,Master's,Married,Full-time,$100k-$150k,19106
+P029,27,F,White,Non-Hispanic,Bachelor's,Single,Full-time,$50k-$75k,98104
+P030,58,M,Hispanic,Hispanic,High School,Married,Full-time,$25k-$50k,92103
+P031,40,F,White,Non-Hispanic,Master's,Married,Part-time,$75k-$100k,97209
+P032,68,M,Black,Non-Hispanic,Bachelor's,Widowed,Retired,$50k-$75k,33140
+P033,31,F,Asian,Non-Hispanic,PhD,Single,Full-time,$100k-$150k,80209
+P034,50,M,White,Non-Hispanic,Associate's,Divorced,Full-time,$25k-$50k,10014
+P035,43,F,Hispanic,Hispanic,Bachelor's,Married,Full-time,$50k-$75k,77010
+P036,66,M,White,Non-Hispanic,Master's,Married,Retired,$75k-$100k,02116
+P037,29,F,Black,Non-Hispanic,Bachelor's,Single,Full-time,$50k-$75k,20012
+P038,55,M,White,Non-Hispanic,High School,Married,Full-time,$25k-$50k,30308
+P039,38,F,Asian,Non-Hispanic,Master's,Divorced,Full-time,$100k-$150k,60615
+P040,72,M,White,Hispanic,Associate's,Widowed,Retired,<$25k,90005
+P041,32,F,Black,Non-Hispanic,Bachelor's,Single,Full-time,$50k-$75k,10016
+P042,48,M,White,Non-Hispanic,PhD,Married,Full-time,$150k+,98107

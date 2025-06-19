@@ -1,0 +1,31 @@
+timestamp,patient_id,glucose_level,fasting_status,meal_proximity,notes
+2024-02-01 08:15:23,P001,92,fasting,>8hrs,Baseline measurement
+2024-02-01 12:30:45,P001,128,non-fasting,1hr post-meal,After standard lunch
+2024-02-01 17:45:12,P001,105,non-fasting,3hrs post-meal,Before exercise
+2024-02-02 08:20:11,P001,94,fasting,>8hrs,Morning measurement
+2024-02-03 08:17:33,P001,91,fasting,>8hrs,Consistent with baseline
+2024-02-01 09:05:18,P002,118,fasting,>8hrs,Higher than expected
+2024-02-01 13:22:41,P002,163,non-fasting,1hr post-meal,Post-carbohydrate spike
+2024-02-01 18:12:09,P002,132,non-fasting,4hrs post-meal,Still elevated
+2024-02-02 08:45:22,P002,115,fasting,>8hrs,Slight improvement
+2024-02-03 09:01:12,P002,112,fasting,>8hrs,Trending down
+2024-02-01 07:55:29,P003,87,fasting,>8hrs,Lower range of normal
+2024-02-01 12:15:37,P003,142,non-fasting,30min post-meal,Rapid spike
+2024-02-01 16:30:18,P003,95,non-fasting,4hrs post-meal,Good recovery
+2024-02-02 07:50:44,P003,85,fasting,>8hrs,Consistent
+2024-02-03 08:05:10,P003,86,fasting,>8hrs,Stable readings
+2024-02-04 07:30:22,P001,93,fasting,>8hrs,Normal range
+2024-02-04 12:20:15,P001,135,non-fasting,45min post-meal,Expected increase
+2024-02-04 08:25:39,P002,108,fasting,>8hrs,Continuing improvement
+2024-02-04 07:55:18,P003,88,fasting,>8hrs,Consistent readings
+2024-02-05 08:00:23,P001,95,fasting,>8hrs,Slight variation
+2024-02-05 08:30:41,P002,110,fasting,>8hrs,No significant change
+2024-02-05 07:45:12,P003,84,fasting,>8hrs,Lower end of normal
+2024-02-06 07:45:33,P004,145,fasting,>8hrs,Elevated - flagged
+2024-02-06 12:30:18,P004,212,non-fasting,1hr post-meal,Significantly elevated
+2024-02-06 17:15:29,P004,175,non-fasting,5hrs post-meal,Slow recovery
+2024-02-07 08:10:12,P004,138,fasting,>8hrs,Still elevated
+2024-02-08 07:55:23,P004,142,fasting,>8hrs,No improvement
+2024-02-06 08:20:15,P005,98,fasting,>8hrs,Normal range
+2024-02-07 08:15:42,P005,101,fasting,>8hrs,Slight increase
+2024-02-08 08:30:11,P005,97,fasting,>8hrs,Returned to baseline
