@@ -1,76 +1,72 @@
-# 🔬 LabVerse AI - Intelligent Laboratory Data Analysis
+# LabVerse AI 🔬
 
-**LabVerse AI** is a comprehensive laboratory data analysis platform that brings the power of Glean AI to laboratory settings. It provides intelligent, conversational access to laboratory data with advanced analytics, visualization, and statistical capabilities.
+**Intelligent Laboratory Data Analysis Assistant with Conversational AI Agent**
 
-## 🎯 Vision
+LabVerse is an AI-powered internal research assistant for scientific labs that lets users search, summarize, analyze, and manipulate research datasets (CSV, Excel, JSON, PDF) via natural language. The system features a modular, conversational agent architecture with memory, clarification capabilities, and code generation.
 
-LabVerse AI aims to be the **definitive Glean AI for laboratory environments**, enabling researchers, clinicians, and laboratory professionals to:
+## 🌟 Features
 
-- **Ask natural language questions** about their laboratory data
-- **Generate sophisticated analyses** with automatic code generation
-- **Create publication-ready visualizations** instantly
-- **Detect anomalies and patterns** in laboratory results
-- **Perform statistical testing** with proper hypothesis validation
-- **Export and share results** seamlessly
-
-## ✨ Key Features
-
-### 🤖 **Intelligent Query Processing**
-- Natural language understanding of laboratory terminology
-- Automatic intent detection (analysis, visualization, statistics, anomaly detection)
-- Context-aware responses based on conversation history
+### 🧠 **Intelligent Agent Architecture**
+- **Intent Classification**: Automatically understands user requests (visualization, statistical analysis, data cleaning, etc.)
+- **Entity Extraction**: Identifies files, columns, methods, and parameters from natural language
+- **Smart Clarification**: Asks follow-up questions when information is missing or ambiguous
+- **Context Memory**: Maintains conversation history and file focus across interactions
+- **Hybrid Retrieval**: Combines semantic search with metadata filtering for optimal data access
 
 ### 📊 **Advanced Data Analysis**
-- **Multi-format support**: CSV, Excel, JSON, TSV, TXT files
-- **Laboratory-specific metadata extraction**: Patient counts, date ranges, lab parameters
-- **Automatic code generation**: Pandas, NumPy, SciPy, Matplotlib
-- **Statistical analysis**: T-tests, ANOVA, correlation, regression, chi-square tests
-
-### 📈 **Data Visualization**
-- Publication-quality plots and charts
-- Interactive visualizations
-- Automatic plot saving and sharing
-- Laboratory-specific color schemes and formatting
-
-### 🔍 **Anomaly Detection**
-- Statistical outlier detection (IQR, Z-score methods)
-- Clinical significance flagging
-- Reference range validation
-- Quality control monitoring
-
-### 📁 **File Management**
-- Drag-and-drop file upload
-- Automatic indexing and metadata extraction
-- File versioning and history
-- Export capabilities
+- **Statistical Analysis**: T-tests, ANOVA, correlation, regression, chi-square tests
+- **Data Visualization**: Histograms, scatter plots, boxplots, heatmaps, correlation matrices
+- **Data Cleaning**: Outlier detection, missing value handling, data validation
+- **Anomaly Detection**: Statistical and laboratory-specific anomaly identification
+- **Code Generation**: Automatic Python/Pandas code generation with execution
 
 ### 💬 **Conversational Interface**
-- Real-time chat interface
-- Message history and context preservation
+- Real-time chat interface with message history
+- Context preservation across sessions
+- Follow-up suggestions and guided workflows
+- Multi-file analysis support
 - Quick action buttons for common queries
-- File browser sidebar
 
 ## 🏗️ Architecture
 
+### Agent Pipeline
+
+```
+User Query  
+   ↓  
+Intent Classifier + Entity Extractor  
+   ↓  
+[Is info missing?] → Clarifier → Ask follow-up  
+   ↓  
+Data Retriever → Contextual Prompt Builder  
+   ↓  
+LLM (OpenAI GPT) → Code/Answer Generator  
+   ↓  
+Executor → Result Output + Next-Step Suggestions
+```
+
+### System Architecture
+
 ```
 ┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐
-│   React Frontend│    │   FastAPI Backend│    │   AI/ML Engine  │
+│   React Frontend│    │   FastAPI Backend│    │ Agent Architecture│
 │                 │    │                 │    │                 │
-│ • Chat Interface│◄──►│ • REST API      │◄──►│ • Ollama LLM    │
-│ • File Browser  │    │ • File Upload   │    │ • Vector Store  │
-│ • Visualizations│    │ • Data Export   │    │ • Code Gen      │
-│ • Quick Actions │    │ • Health Checks │    │ • Analysis      │
-└─────────────────┘    └─────────────────┘    └─────────────────┘
-                                │
-                                ▼
-                       ┌─────────────────┐
-                       │   Data Storage  │
-                       │                 │
-                       │ • CSV/Excel     │
-                       │ • JSON/TSV      │
-                       │ • Vector DB     │
-                       │ • Plots/Exports │
-                       └─────────────────┘
+│ • Chat Interface│◄──►│ • REST API      │◄──►│ • Intent Classifier│
+│ • File Browser  │    │ • File Upload   │    │ • Entity Extractor │
+│ • Visualizations│    │ • Session Mgmt  │    │ • Clarifier       │
+│ • Quick Actions │    │ • Health Checks │    │ • Retriever       │
+└─────────────────┘    └─────────────────┘    │ • Prompt Builder  │
+                                │              │ • Executor        │
+                                ▼              └─────────────────┘
+                       ┌─────────────────┐              │
+                       │   Data Storage  │              ▼
+                       │                 │    ┌─────────────────┐
+                       │ • CSV/Excel     │    │   AI/ML Engine  │
+                       │ • JSON/TSV      │    │                 │
+                       │ • Vector DB     │    │ • OpenAI GPT    │
+                       │ • Session Store │    │ • ChromaDB      │
+                       └─────────────────┘    │ • Code Execution│
+                                              └─────────────────┘
 ```
 
 ## 🚀 Quick Start
@@ -78,7 +74,7 @@ LabVerse AI aims to be the **definitive Glean AI for laboratory environments**, 
 ### Prerequisites
 - Python 3.8+
 - Node.js 16+
-- Ollama with Mistral model
+- OpenAI API Key
 
 ### Installation
 
@@ -91,6 +87,9 @@ LabVerse AI aims to be the **definitive Glean AI for laboratory environments**, 
 2. **Install Python dependencies**
    ```bash
    pip install -r requirements.txt
+   
+   # Optional: Install spaCy model for enhanced entity extraction
+   python -m spacy download en_core_web_sm
    ```
 
 3. **Install Node.js dependencies**
@@ -98,9 +97,12 @@ LabVerse AI aims to be the **definitive Glean AI for laboratory environments**, 
    npm install
    ```
 
-4. **Set up Ollama**
-   ```bash
-   ollama pull mistral
+4. **Set up environment variables**
+   Create a `.env` file in the root directory:
+   ```env
+   OPENAI_API_KEY=your-openai-api-key-here
+   DATA_DIR=data
+   VECTOR_DB_DIR=chroma_db
    ```
 
 5. **Add your laboratory data**
@@ -126,49 +128,100 @@ LabVerse AI aims to be the **definitive Glean AI for laboratory environments**, 
 
 ## 📖 Usage Examples
 
-### Basic Queries
+### Agent Architecture Queries
+
+The new agent architecture supports natural language queries with automatic intent classification:
+
+#### Basic Data Exploration
 ```
-"Show me a summary of all the data"
-"What's the average glucose level?"
-"Find patients with abnormal cholesterol values"
-"Create a correlation matrix for all numeric variables"
+"Show me a summary of the glucose panel data"
+"What columns are available in the lab results file?"
+"How many patients are in the study?"
 ```
 
-### Advanced Analysis
+#### Statistical Analysis
 ```
-"Perform a t-test comparing glucose levels between groups"
-"Detect outliers in the lab results using IQR method"
-"Create a boxplot showing the distribution of hemoglobin levels"
-"Run a chi-square test for categorical variables"
+"Perform a t-test comparing glucose levels between control and treatment groups"
+"Calculate correlation between cholesterol and age"
+"Run ANOVA to compare hemoglobin across different age groups"
 ```
 
-### Visualization Requests
+#### Data Visualization
 ```
-"Plot the distribution of glucose levels"
-"Create a scatter plot of age vs blood pressure"
-"Show me a heatmap of correlation coefficients"
-"Generate a time series plot of patient visits"
+"Create a histogram of glucose levels"
+"Plot blood pressure vs age with a scatter plot"
+"Show me a heatmap of correlations between all lab values"
 ```
+
+#### Data Cleaning
+```
+"Find outliers in the cholesterol data using IQR method"
+"Remove rows with missing glucose values"
+"Standardize all numeric columns"
+```
+
+#### Advanced Queries
+```
+"Which patients have abnormal glucose levels outside reference range?"
+"Create a boxplot showing HDL distribution by gender and age group"
+"Generate a summary report of data quality issues"
+```
+
+### API Endpoints
+
+#### New Agent Architecture
+- `POST /assistant/query` - Send queries to the intelligent agent
+- `GET /assistant/sessions` - List active conversation sessions
+- `GET /assistant/sessions/{id}` - Get session information
+- `DELETE /assistant/sessions/{id}` - Clear a session
+
+#### Legacy Endpoints
+- `POST /chat` - Legacy chat endpoint
+- `GET /files` - List available data files
+- `POST /upload` - Upload new data files
 
 ## 🔧 Configuration
 
-### Environment Variables
-Create a `.env` file in the root directory:
+### Agent Components
 
-```env
-DATA_DIR=data
-VECTOR_DB_DIR=chroma_db
-OLLAMA_BASE_URL=http://localhost:11434
-OLLAMA_MODEL=mistral
+The agent architecture is modular and configurable:
+
+```python
+from labverse.agent import AssistantAgent, IntentClassifier, EntityExtractor
+
+# Initialize with custom configuration
+agent = AssistantAgent(
+    llm=your_llm_instance,
+    vector_db=your_vector_db,
+    data_dir="your_data_directory",
+    available_files=file_list,
+    file_schemas=column_schemas
+)
 ```
 
-### Customizing Analysis
+### Intent Types
+
+The system recognizes these intent types:
+- `search_retrieval` - Finding specific data/files
+- `metadata_query` - Questions about data structure
+- `data_visualization` - Creating plots and charts
+- `statistical_analysis` - Statistical tests and calculations
+- `data_cleaning` - Data preprocessing and cleaning
+- `new_dataset_generation` - Creating new datasets
+- `file_summary` - Data overviews and summaries
+- `code_generation` - Generating analysis code
+- `scientific_question` - Research questions and hypotheses
+- `access_permission` - Authentication issues
+- `help_instruction` - Usage help and instructions
+
+### Customizing for Your Lab
+
 The system can be customized for specific laboratory needs:
 
-- **Reference ranges**: Add laboratory-specific normal values
-- **Quality control**: Implement custom QC rules
-- **Statistical methods**: Add domain-specific tests
-- **Visualization templates**: Create laboratory-branded plots
+- **Reference Ranges**: Add laboratory-specific normal values
+- **Quality Control**: Implement custom QC rules
+- **Statistical Methods**: Add domain-specific tests
+- **Visualization Templates**: Create laboratory-branded plots
 
 ## 📊 Supported Data Formats
 
@@ -178,66 +231,50 @@ The system can be customized for specific laboratory needs:
 | Excel | .xlsx, .xls files | Multi-sheet support, formulas |
 | JSON | JavaScript Object Notation | Nested data, arrays |
 | TSV | Tab-separated values | Large dataset support |
-| TXT | Plain text files | Flexible delimiter detection |
 
-## 🧪 Laboratory-Specific Features
+## 🧪 Example Laboratory Workflows
 
-### Metadata Extraction
-- **Patient identification**: Automatic detection of patient/subject columns
-- **Date ranges**: Temporal analysis capabilities
-- **Lab parameters**: Test name and unit extraction
-- **Reference ranges**: Clinical significance assessment
+### Quality Control Analysis
+1. Upload daily QC data
+2. "Check for QC failures in today's results"
+3. "Plot control charts for glucose QC"
+4. "Generate QC summary report"
 
-### Quality Control
-- **Outlier detection**: Statistical and clinical methods
-- **Data validation**: Format and range checking
-- **Missing data analysis**: Pattern identification
-- **Consistency checks**: Cross-reference validation
+### Research Data Analysis
+1. "Compare biomarker levels between treatment groups"
+2. "Are there any correlations between lab values and patient outcomes?"
+3. "Create publication-ready figures for the results"
+4. "Export the statistical analysis results"
 
-### Statistical Analysis
-- **Descriptive statistics**: Mean, median, standard deviation
-- **Inferential statistics**: Hypothesis testing, confidence intervals
-- **Correlation analysis**: Pearson, Spearman correlations
-- **Regression analysis**: Linear and logistic regression
+### Data Validation
+1. "Check for missing values in the patient data"
+2. "Identify outliers in the cholesterol measurements"
+3. "Validate that all patient IDs are unique"
+4. "Generate a data quality report"
 
-## 🔒 Security & Privacy
+## 🛠️ Development
 
-- **Local processing**: All data stays on your infrastructure
-- **No cloud dependencies**: Complete offline capability
-- **Data encryption**: Optional encryption for sensitive data
-- **Access control**: Role-based permissions (planned)
+### Adding Custom Components
 
-## 🚧 Roadmap
+```python
+# Add custom intent type
+from labverse.agent.intent_classifier import IntentType, IntentClassifier
 
-### Phase 1: Core Platform ✅
-- [x] Basic query processing
-- [x] Data analysis capabilities
-- [x] Simple visualizations
-- [x] File management
+# Add custom prompt templates
+from labverse.agent.prompt_builder import PromptBuilder, PromptTemplate
 
-### Phase 2: Advanced Analytics 🚧
-- [ ] Machine learning integration
-- [ ] Predictive analytics
-- [ ] Time series analysis
-- [ ] Multi-modal data support
+prompt_builder.add_custom_template(
+    IntentType.CUSTOM_ANALYSIS,
+    PromptTemplate(
+        system_prompt="Your custom system prompt...",
+        user_template="Your custom user template...",
+        max_tokens=2000
+    )
+)
+```
 
-### Phase 3: Enterprise Features 📋
-- [ ] User authentication
-- [ ] Role-based access control
-- [ ] Audit logging
-- [ ] API rate limiting
+### Running Tests
 
-### Phase 4: Laboratory Integration 📋
-- [ ] LIMS integration
-- [ ] Real-time data streaming
-- [ ] Automated reporting
-- [ ] Regulatory compliance
-
-## 🤝 Contributing
-
-We welcome contributions! Please see our [Contributing Guidelines](CONTRIBUTING.md) for details.
-
-### Development Setup
 ```bash
 # Install development dependencies
 pip install -r requirements-dev.txt
@@ -252,16 +289,25 @@ black .
 prettier --write src/
 ```
 
+## 🤝 Contributing
+
+1. Fork the repository
+2. Create a feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
+
 ## 📄 License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
 ## 🙏 Acknowledgments
 
-- **Ollama** for providing the local LLM capabilities
+- **OpenAI** for providing the LLM capabilities
 - **LangChain** for the AI/ML framework
 - **FastAPI** for the robust backend API
 - **React** for the modern frontend interface
+- **ChromaDB** for vector database functionality
 - **Pandas** for powerful data manipulation
 - **Matplotlib/Seaborn** for beautiful visualizations
 

@@ -1,5 +1,8 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
+import { FaFolder, FaFileAlt, FaFileCsv, FaFileExcel, FaFileCode, FaChevronDown, FaChevronRight, FaCopy, FaPlay } from 'react-icons/fa';
+import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
+import { tomorrow } from 'react-syntax-highlighter/dist/esm/styles/prism';
 import '../styles/ChatbotView.css';
 
 const ChatbotView: React.FC = () => {
@@ -8,6 +11,9 @@ const ChatbotView: React.FC = () => {
         text: string;
         sender: "User" | "AI";
         timestamp: Date;
+        code?: string;
+        execution_result?: string;
+        code_type?: string;
         attachments?: Array<{
             type: 'plot' | 'data' | 'file';
             url?: string;
@@ -35,7 +41,10 @@ const ChatbotView: React.FC = () => {
         initialMessages.push({ 
             text: responseData.message, 
             sender: "AI", 
-            timestamp: new Date() 
+            timestamp: new Date(),
+            code: responseData.code,
+            execution_result: responseData.execution_result,
+            code_type: responseData.code_type
         });
     }
 
@@ -96,27 +105,30 @@ const ChatbotView: React.FC = () => {
                 const data = await response.json();
 
                 // Process attachments if any
-                const attachments = [];
+                const attachments: Message['attachments'] = [];
                 if (data.plot_url) {
                     attachments.push({
-                        type: 'plot',
+                        type: 'plot' as const,
                         url: data.plot_url,
                         filename: data.plot_filename
                     });
                 }
                 if (data.data_export) {
                     attachments.push({
-                        type: 'data',
+                        type: 'data' as const,
                         content: data.data_export,
                         filename: data.data_filename
                     });
                 }
 
-                // update messages with AI response
+                // update messages with AI response including code and execution results
                 setMessages([...newMessages, { 
                     text: data.message, 
                     sender: "AI", 
                     timestamp: new Date(),
+                    code: data.code,
+                    execution_result: data.execution_result,
+                    code_type: data.code_type || 'python',
                     attachments
                 }]);
             } catch (error) {
@@ -160,6 +172,21 @@ const ChatbotView: React.FC = () => {
         document.body.removeChild(a);
     };
 
+    const getFileIcon = (filename: string) => {
+        const extension = filename.split('.').pop()?.toLowerCase();
+        switch (extension) {
+            case 'csv':
+                return <FaFileCsv style={{ color: '#4CAF50', marginRight: '8px' }} />;
+            case 'xlsx':
+            case 'xls':
+                return <FaFileExcel style={{ color: '#1B7535', marginRight: '8px' }} />;
+            case 'json':
+                return <FaFileCode style={{ color: '#FF9800', marginRight: '8px' }} />;
+            default:
+                return <FaFileAlt style={{ color: '#2196F3', marginRight: '8px' }} />;
+        }
+    };
+
     const renderAttachments = (attachments: Message['attachments']) => {
         if (!attachments || attachments.length === 0) return null;
 
@@ -197,54 +224,99 @@ const ChatbotView: React.FC = () => {
         );
     };
 
+    const CodeBlock: React.FC<{ 
+        code: string; 
+        language: string; 
+        executionResult?: string; 
+    }> = ({ code, language, executionResult }) => {
+        const [isExpanded, setIsExpanded] = useState(false);
+        const [copied, setCopied] = useState(false);
+
+        const copyToClipboard = async () => {
+            try {
+                await navigator.clipboard.writeText(code);
+                setCopied(true);
+                setTimeout(() => setCopied(false), 2000);
+            } catch (err) {
+                console.error('Failed to copy code:', err);
+            }
+        };
+
+        return (
+            <div className="code-block-container">
+                <div className="code-block-header" onClick={() => setIsExpanded(!isExpanded)}>
+                    <div className="code-block-title">
+                        {isExpanded ? <FaChevronDown /> : <FaChevronRight />}
+                        <FaFileCode style={{ marginLeft: '8px', marginRight: '8px' }} />
+                        <span>Generated {language.toUpperCase()} Code</span>
+                    </div>
+                    <div className="code-block-actions">
+                        <button 
+                            className="code-action-btn"
+                            onClick={(e) => {
+                                e.stopPropagation();
+                                copyToClipboard();
+                            }}
+                            title="Copy code"
+                        >
+                            <FaCopy />
+                            {copied && <span className="copy-feedback">Copied!</span>}
+                        </button>
+                    </div>
+                </div>
+                
+                {isExpanded && (
+                    <div className="code-block-content">
+                        <SyntaxHighlighter
+                            language={language}
+                            style={tomorrow}
+                            showLineNumbers={true}
+                            wrapLines={true}
+                            customStyle={{
+                                margin: 0,
+                                borderRadius: '0 0 8px 8px',
+                                fontSize: '14px'
+                            }}
+                        >
+                            {code}
+                        </SyntaxHighlighter>
+                        
+                        {executionResult && (
+                            <div className="execution-result">
+                                <div className="execution-result-header">
+                                    <FaPlay style={{ marginRight: '8px' }} />
+                                    <span>Execution Result</span>
+                                </div>
+                                <pre className="execution-result-content">
+                                    {executionResult}
+                                </pre>
+                            </div>
+                        )}
+                    </div>
+                )}
+            </div>
+        );
+    };
+
     return (
         <div className="chat-container">
             <div className="sidebar">
                 <div className="sidebar-section">
-                    <h3>📁 Available Files</h3>
+                    <h3><FaFolder style={{ color: '#FFB74D', marginRight: '8px' }} />Available Files</h3>
                     <div className="file-list">
                         {availableFiles.map((file, index) => (
                             <div key={index} className="file-item">
-                                📄 {file}
+                                {getFileIcon(file)}
+                                {file}
                             </div>
                         ))}
-                    </div>
-                </div>
-                
-                <div className="sidebar-section">
-                    <h3>🔬 Quick Actions</h3>
-                    <div className="quick-actions">
-                        <button 
-                            onClick={() => setUserQuery("Show me a summary of all the data")}
-                            className="quick-action-btn"
-                        >
-                            Data Summary
-                        </button>
-                        <button 
-                            onClick={() => setUserQuery("Find any anomalies in the lab results")}
-                            className="quick-action-btn"
-                        >
-                            Detect Anomalies
-                        </button>
-                        <button 
-                            onClick={() => setUserQuery("Create a correlation matrix for all numeric variables")}
-                            className="quick-action-btn"
-                        >
-                            Correlation Analysis
-                        </button>
-                        <button 
-                            onClick={() => setUserQuery("Show me the distribution of glucose levels")}
-                            className="quick-action-btn"
-                        >
-                            Distribution Plot
-                        </button>
                     </div>
                 </div>
             </div>
 
             <div className="messages-container">
                 <div className="chat-header">
-                    <h2>🔬 LabVerse AI Assistant</h2>
+                    <h2>LabVerse</h2>
                     <p>Your intelligent laboratory data analysis companion</p>
                 </div>
                 
@@ -256,10 +328,18 @@ const ChatbotView: React.FC = () => {
                                     className="message-text"
                                     dangerouslySetInnerHTML={{ __html: formatMessage(msg.text) }}
                                 />
+                                
+                                {/* Render code block if present */}
+                                {msg.code && (
+                                    <CodeBlock 
+                                        code={msg.code}
+                                        language={msg.code_type || 'python'}
+                                        executionResult={msg.execution_result}
+                                    />
+                                )}
+                                
+                                {/* Render existing attachments */}
                                 {renderAttachments(msg.attachments)}
-                            </div>
-                            <div className="message-timestamp">
-                                {msg.timestamp.toLocaleTimeString()}
                             </div>
                         </div>
                     ))}

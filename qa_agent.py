@@ -6,7 +6,7 @@ import seaborn as sns
 from typing import List, Dict, Any, Optional
 import json
 import re
-from config import llm
+from config import llm, get_llm_for_task
 from vector_store import build_vector_store
 from config import DATA_DIR
 
@@ -15,47 +15,73 @@ plt.switch_backend('Agg')
 
 class LaboratoryAI:
     def __init__(self):
-        self.db = build_vector_store(DATA_DIR)
-        self.retriever = self.db.as_retriever(search_kwargs={"k": 3})  # Get top 3 relevant docs
-        self.conversation_history = []
+        try:
+            self.db = build_vector_store(DATA_DIR)
+            self.retriever = self.db.as_retriever(search_kwargs={"k": 3})  # Get top 3 relevant docs
+            self.conversation_history = []
+            print("✅ LaboratoryAI initialized successfully with OpenAI")
+        except Exception as e:
+            print(f"Error initializing LaboratoryAI: {e}")
+            print("💡 Make sure your OPENAI_API_KEY is set correctly")
+            raise
         
-    def process_query(self, query: str) -> str:
+    def process_query(self, query: str) -> Dict[str, Any]:
         """Main query processing function with enhanced laboratory intelligence."""
-        # Add to conversation history
-        self.conversation_history.append({"role": "user", "content": query})
-        
-        # Step 1: Get relevant documents
-        docs = self.retriever.get_relevant_documents(query)
-        
-        print("\n---RETRIEVED FILES---")
-        relevant_files = []
-        for i, doc in enumerate(docs):
-            file_path = doc.metadata["file_path"]
-            print(f"{i+1}. {file_path}")
-            relevant_files.append(file_path)
-        
-        # Step 2: Analyze query intent
-        intent = self._analyze_query_intent(query)
-        print(f"\n---QUERY INTENT: {intent}---")
-        
-        # Step 3: Process based on intent
-        if intent == "data_analysis":
-            result = self._perform_data_analysis(query, docs, relevant_files)
-        elif intent == "statistical_test":
-            result = self._perform_statistical_analysis(query, docs, relevant_files)
-        elif intent == "data_visualization":
-            result = self._create_visualization(query, docs, relevant_files)
-        elif intent == "data_summary":
-            result = self._provide_data_summary(query, docs, relevant_files)
-        elif intent == "anomaly_detection":
-            result = self._detect_anomalies(query, docs, relevant_files)
-        else:
-            result = self._provide_information(query, docs, relevant_files)
-        
-        # Add response to conversation history
-        self.conversation_history.append({"role": "assistant", "content": result})
-        
-        return result
+        try:
+            # Add to conversation history
+            self.conversation_history.append({"role": "user", "content": query})
+            
+            # Step 1: Get relevant documents
+            docs = self.retriever.get_relevant_documents(query)
+            
+            print("\n---RETRIEVED FILES---")
+            relevant_files = []
+            for i, doc in enumerate(docs):
+                file_path = doc.metadata["file_path"]
+                print(f"{i+1}. {file_path}")
+                relevant_files.append(file_path)
+            
+            # Step 2: Analyze query intent
+            intent = self._analyze_query_intent(query)
+            print(f"\n---QUERY INTENT: {intent}---")
+            
+            # Step 3: Process based on intent
+            if intent == "data_analysis":
+                result = self._perform_data_analysis(query, docs, relevant_files)
+            elif intent == "statistical_test":
+                result = self._perform_statistical_analysis(query, docs, relevant_files)
+            elif intent == "data_visualization":
+                result = self._create_visualization(query, docs, relevant_files)
+            elif intent == "data_summary":
+                result = self._provide_data_summary(query, docs, relevant_files)
+            elif intent == "anomaly_detection":
+                result = self._detect_anomalies(query, docs, relevant_files)
+            else:
+                result = self._provide_information(query, docs, relevant_files)
+            
+            # Ensure result is always a dictionary with the expected structure
+            if isinstance(result, str):
+                result = {"message": result, "code": None, "execution_result": None}
+            elif not isinstance(result, dict):
+                result = {"message": str(result), "code": None, "execution_result": None}
+            
+            # Add response to conversation history
+            response_text = result.get("message", str(result))
+            self.conversation_history.append({"role": "assistant", "content": response_text})
+            
+            return result
+            
+        except Exception as e:
+            error_msg = f"Error processing query: {str(e)}"
+            if "api key" in str(e).lower():
+                error_msg += "\n💡 Please check your OpenAI API key configuration"
+            elif "rate limit" in str(e).lower():
+                error_msg += "\n💡 Rate limit exceeded. Please wait a moment and try again"
+            elif "insufficient_quota" in str(e).lower():
+                error_msg += "\n💡 OpenAI API quota exceeded. Please check your billing"
+            
+            print(f"❌ {error_msg}")
+            return {"message": error_msg, "code": None, "execution_result": None}
     
     def _analyze_query_intent(self, query: str) -> str:
         """Analyze the intent of the user query."""
@@ -83,43 +109,100 @@ class LaboratoryAI:
         
         return "information"
     
-    def _perform_data_analysis(self, query: str, docs: List, file_paths: List[str]) -> str:
+    def _perform_data_analysis(self, query: str, docs: List, file_paths: List[str]) -> Dict[str, Any]:
         """Perform data analysis using generated pandas code."""
-        code = self._generate_enhanced_pandas_code(query, docs)
-        print("\n---GENERATED CODE---")
-        print(code)
-        
-        result = self._execute_pandas_code(code, file_paths)
-        return result
+        try:
+            # Use analysis model for complex data tasks
+            analysis_llm = get_llm_for_task("analysis")
+            code = self._generate_enhanced_pandas_code(query, docs, analysis_llm)
+            print("\n---GENERATED CODE---")
+            print(code)
+            
+            result = self._execute_pandas_code(code, file_paths)
+            
+            return {
+                "message": "Data analysis completed successfully.",
+                "code": code,
+                "execution_result": result,
+                "code_type": "python"
+            }
+        except Exception as e:
+            return {
+                "message": f"Data analysis failed: {str(e)}",
+                "code": None,
+                "execution_result": None
+            }
     
-    def _perform_statistical_analysis(self, query: str, docs: List, file_paths: List[str]) -> str:
+    def _perform_statistical_analysis(self, query: str, docs: List, file_paths: List[str]) -> Dict[str, Any]:
         """Perform statistical analysis with proper hypothesis testing."""
-        code = self._generate_statistical_code(query, docs)
-        print("\n---GENERATED STATISTICAL CODE---")
-        print(code)
-        
-        result = self._execute_pandas_code(code, file_paths)
-        return result
+        try:
+            analysis_llm = get_llm_for_task("analysis")
+            code = self._generate_statistical_code(query, docs, analysis_llm)
+            print("\n---GENERATED STATISTICAL CODE---")
+            print(code)
+            
+            result = self._execute_pandas_code(code, file_paths)
+            
+            return {
+                "message": "Statistical analysis completed successfully.",
+                "code": code,
+                "execution_result": result,
+                "code_type": "python"
+            }
+        except Exception as e:
+            return {
+                "message": f"Statistical analysis failed: {str(e)}",
+                "code": None,
+                "execution_result": None
+            }
     
-    def _create_visualization(self, query: str, docs: List, file_paths: List[str]) -> str:
+    def _create_visualization(self, query: str, docs: List, file_paths: List[str]) -> Dict[str, Any]:
         """Create data visualizations."""
-        code = self._generate_visualization_code(query, docs)
-        print("\n---GENERATED VISUALIZATION CODE---")
-        print(code)
-        
-        result = self._execute_visualization_code(code, file_paths)
-        return result
+        try:
+            analysis_llm = get_llm_for_task("detailed")
+            code = self._generate_visualization_code(query, docs, analysis_llm)
+            print("\n---GENERATED VISUALIZATION CODE---")
+            print(code)
+            
+            result = self._execute_visualization_code(code, file_paths)
+            
+            return {
+                "message": "Visualization created successfully.",
+                "code": code,
+                "execution_result": result,
+                "code_type": "python"
+            }
+        except Exception as e:
+            return {
+                "message": f"Visualization failed: {str(e)}",
+                "code": None,
+                "execution_result": None
+            }
     
-    def _detect_anomalies(self, query: str, docs: List, file_paths: List[str]) -> str:
+    def _detect_anomalies(self, query: str, docs: List, file_paths: List[str]) -> Dict[str, Any]:
         """Detect anomalies in laboratory data."""
-        code = self._generate_anomaly_detection_code(query, docs)
-        print("\n---GENERATED ANOMALY DETECTION CODE---")
-        print(code)
-        
-        result = self._execute_pandas_code(code, file_paths)
-        return result
+        try:
+            analysis_llm = get_llm_for_task("analysis")
+            code = self._generate_anomaly_detection_code(query, docs, analysis_llm)
+            print("\n---GENERATED ANOMALY DETECTION CODE---")
+            print(code)
+            
+            result = self._execute_pandas_code(code, file_paths)
+            
+            return {
+                "message": "Anomaly detection completed successfully.",
+                "code": code,
+                "execution_result": result,
+                "code_type": "python"
+            }
+        except Exception as e:
+            return {
+                "message": f"Anomaly detection failed: {str(e)}",
+                "code": None,
+                "execution_result": None
+            }
     
-    def _provide_data_summary(self, query: str, docs: List, file_paths: List[str]) -> str:
+    def _provide_data_summary(self, query: str, docs: List, file_paths: List[str]) -> Dict[str, Any]:
         """Provide comprehensive data summaries."""
         summaries = []
         for file_path in file_paths:
@@ -130,9 +213,14 @@ class LaboratoryAI:
             except Exception as e:
                 summaries.append(f"Error processing {file_path}: {str(e)}")
         
-        return "\n\n".join(summaries)
+        result_text = "\n\n".join(summaries)
+        return {
+            "message": result_text,
+            "code": None,
+            "execution_result": None
+        }
     
-    def _provide_information(self, query: str, docs: List, file_paths: List[str]) -> str:
+    def _provide_information(self, query: str, docs: List, file_paths: List[str]) -> Dict[str, Any]:
         """Provide information about relevant files."""
         info = []
         for doc in docs:
@@ -149,10 +237,18 @@ class LaboratoryAI:
                     file_info += f"   - Patients: {lab_meta['patient_count']}\n"
             info.append(file_info)
         
-        return "**Relevant Files Found:**\n\n" + "\n".join(info)
+        result_text = "**Relevant Files Found:**\n\n" + "\n".join(info)
+        return {
+            "message": result_text,
+            "code": None,
+            "execution_result": None
+        }
     
-    def _generate_enhanced_pandas_code(self, query: str, docs: List) -> str:
+    def _generate_enhanced_pandas_code(self, query: str, docs: List, model_llm=None) -> str:
         """Generate enhanced pandas code with laboratory context."""
+        if model_llm is None:
+            model_llm = llm
+            
         context = self._build_context_from_docs(docs)
         
         prompt = f"""
@@ -175,11 +271,18 @@ class LaboratoryAI:
         ```python
         """
         
-        response = llm.predict(prompt)
-        return self._extract_code_from_response(response)
-    
-    def _generate_statistical_code(self, query: str, docs: List) -> str:
+        try:
+            response = model_llm.predict(prompt)
+            return self._extract_code_from_response(response)
+        except Exception as e:
+            print(f"Error generating pandas code: {e}")
+            return "result = 'Error generating analysis code'"
+
+    def _generate_statistical_code(self, query: str, docs: List, model_llm=None) -> str:
         """Generate statistical analysis code."""
+        if model_llm is None:
+            model_llm = llm
+            
         context = self._build_context_from_docs(docs)
         
         prompt = f"""
@@ -201,11 +304,18 @@ class LaboratoryAI:
         ```python
         """
         
-        response = llm.predict(prompt)
-        return self._extract_code_from_response(response)
-    
-    def _generate_visualization_code(self, query: str, docs: List) -> str:
+        try:
+            response = model_llm.predict(prompt)
+            return self._extract_code_from_response(response)
+        except Exception as e:
+            print(f"Error generating statistical code: {e}")
+            return "result = 'Error generating statistical code'"
+
+    def _generate_visualization_code(self, query: str, docs: List, model_llm=None) -> str:
         """Generate visualization code."""
+        if model_llm is None:
+            model_llm = llm
+            
         context = self._build_context_from_docs(docs)
         
         prompt = f"""
@@ -227,11 +337,18 @@ class LaboratoryAI:
         ```python
         """
         
-        response = llm.predict(prompt)
-        return self._extract_code_from_response(response)
-    
-    def _generate_anomaly_detection_code(self, query: str, docs: List) -> str:
+        try:
+            response = model_llm.predict(prompt)
+            return self._extract_code_from_response(response)
+        except Exception as e:
+            print(f"Error generating visualization code: {e}")
+            return "result = 'Error generating visualization code'"
+
+    def _generate_anomaly_detection_code(self, query: str, docs: List, model_llm=None) -> str:
         """Generate anomaly detection code."""
+        if model_llm is None:
+            model_llm = llm
+            
         context = self._build_context_from_docs(docs)
         
         prompt = f"""
@@ -253,8 +370,12 @@ class LaboratoryAI:
         ```python
         """
         
-        response = llm.predict(prompt)
-        return self._extract_code_from_response(response)
+        try:
+            response = model_llm.predict(prompt)
+            return self._extract_code_from_response(response)
+        except Exception as e:
+            print(f"Error generating anomaly detection code: {e}")
+            return "result = 'Error generating anomaly detection code'"
     
     def _build_context_from_docs(self, docs: List) -> str:
         """Build context from retrieved documents."""
