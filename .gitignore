@@ -44,4 +44,4 @@ infra/terraform/.terraform.tfstate*
 
 ### Local data/cache
 postgres_data/
-redis_data/
+redis_data

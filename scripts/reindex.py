@@ -3,11 +3,20 @@
 Re-embed and re-index datasets in Pinecone
 """
 
+import sys
+import os
+from pathlib import Path
+
+# Ensure the backend directory is in the Python path for absolute imports
+backend_dir = (Path(__file__).resolve().parent.parent / "backend").resolve()
+if str(backend_dir) not in sys.path:
+    sys.path.insert(0, str(backend_dir))
+
 import asyncio
-from app.services.embeddings import EmbeddingService
-from app.services.ingestion import IngestionService
-from app.models.db import get_db
-from app.models.documents import Document
+from app.services.embeddings import EmbeddingService  # pyright: ignore[reportMissingImports]
+from app.services.ingestion import IngestionService  # pyright: ignore[reportMissingImports]
+from app.models.db import get_db  # pyright: ignore[reportMissingImports]
+from app.models.documents import Document  # pyright: ignore[reportMissingImports]
 
 async def reindex_all_documents():
     """Re-index all documents in Pinecone"""

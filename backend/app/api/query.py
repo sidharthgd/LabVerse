@@ -12,6 +12,11 @@ async def query_data(request: QueryRequest):
     try:
         supervisor = Supervisor()
         result = await supervisor.process_query(request.query, request.context)
-        return QueryResponse(result=result)
+        # normalize agent result to match QueryResponse schema
+        return {
+            "result": result,
+            "type": result.get("type", "unknown"),  # unknown is a fallback if not present
+            "sources": result.get("sources"),
+        }
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))

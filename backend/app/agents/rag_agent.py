@@ -1,7 +1,6 @@
 from typing import Dict, Any, List
 from app.services.embeddings import EmbeddingService
 from app.models.db import get_db
-import openai
 
 class RAGAgent:
     """
@@ -10,7 +9,6 @@ class RAGAgent:
     
     def __init__(self):
         self.embedding_service = EmbeddingService()
-        self.client = openai.OpenAI()
     
     async def process(self, query: str, context: Dict[str, Any] = None) -> Dict[str, Any]:
         """
